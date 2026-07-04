@@ -7,8 +7,9 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     show-sql: true
+    defer-datasource-initialization: true
   security:
     oauth2:
       resourceserver:

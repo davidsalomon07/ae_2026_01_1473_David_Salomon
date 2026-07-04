@@ -1,0 +1,180 @@
+{
+  "info": {
+    "_postman_id": "e5789a76-95ec-46b5-9455-a3eece6ab463",
+    "name": "ae_puce_2026_1473_luis_salomon",
+    "description": "Colección de Postman para el Examen 2 de Estacionamiento de Luis Salomon basada en la planificación.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "55416166",
+    "_collection_link": "https://go.postman.co/collection/55416166-e5789a76-95ec-46b5-9455-a3eece6ab463?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "1. Obtener Token Cognito (Intercambio)",
+      "request": {
+        "auth": {
+          "type": "noauth"
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "urlencoded",
+          "urlencoded": [
+            {
+              "key": "grant_type",
+              "value": "authorization_code",
+              "type": "text"
+            },
+            {
+              "key": "client_id",
+              "value": "3gv2oqe4niko3s47srn1kitsk6",
+              "type": "text"
+            },
+            {
+              "key": "client_secret",
+              "value": "14qdd388f1j6fge52el3l5r2ouvcg5sperlno3701t2jj1chgeiu",
+              "type": "text"
+            },
+            {
+              "key": "code",
+              "value": "2a5a9a3f-356a-4335-8eca-3eea2d5b89f1",
+              "type": "text"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://d84l1y8p4kdic.cloudfront.net",
+              "type": "text"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://us-east-1yzwnali2a.auth.us-east-1.amazoncognito.com/oauth2/token",
+          "protocol": "https",
+          "host": [
+            "us-east-1yzwnali2a",
+            "auth",
+            "us-east-1",
+            "amazoncognito",
+            "com"
+          ],
+          "path": [
+            "oauth2",
+            "token"
+          ]
+        },
+        "description": "Intercambia el código temporal obtenido en la Hosted UI por los tokens JWT de Cognito."
+      },
+      "response": []
+    },
+    {
+      "name": "2. Listar Espacios Disponibles (Público)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/parking-spaces/available",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "parking-spaces",
+            "available"
+          ]
+        },
+        "description": "Devuelve la cartelera de puestos de estacionamiento que están desocupados sin requerir token."
+      },
+      "response": []
+    },
+    {
+      "name": "3. Registrar Entrada (Privado)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJraWQiOiJqMldPV1dNeGpuZzFWRGtwcW5lOUJ1aWtyd2ZiSGptdVJaOUhyNVNlL2g4PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1NDM4NTQzOC1kMDUxLTcwYjktOWRjNy01YWQ4ZWEyYmU3Y2YiLCJpc3MiOiJodHRwczovL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tL3VzLWVhc3QtMV95endOQUxJMkEiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiIzZ3Yyb3FlNG5pa28zczQ3c3JuMWtpdHNrNiIsIm9yaWdpbl9qdGkiOiJkYmEyZDZmNS1mNTM0LTQyNWYtYTUyZC1mZjk2NDc0ZTEwNjMiLCJldmVudF9pZCI6IjJmNjgwNTBlLTU2ODItNGY1YS1iNWUxLTUwNzA0MGQ4ZmY4MyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNzgzMTg1NTk4LCJleHAiOjE3ODMxODkxOTgsImlhdCI6MTc4MzE4NTU5OCwianRpIjoiZWE4YzVjNmYtZWY5YS00ZjdjLWJmNGQtNzgxYjYyYTdlYTQxIiwidXNlcm5hbWUiOiI1NDM4NTQzOC1kMDUxLTcwYjktOWRjNy01YWQ4ZWEyYmU3Y2YifQ.uI3vsIy6-r-_aLKPUlx_pteJlqVwfRY7cRejbVsKY_I2PEOXp3dqIkB2mNJsIHToW00zO2MENmL0qic5FvGQgORwZtuwnR1wWXQECkXY7cLrUiag89D96QnMkuB-0cihXQx3BnOgBqq8G720vdG9jjw6KaS2fvIzkSWOAz6OCsmq5NbDceTFzqzA4ljT7585Zp01_wUxHi2mPhZq9cBWgFlPwEjcXKU1ebL-7zrkfcB0GfgzU3k-A65hb4M3ki1nZPYyJsVWmJV_7dfeO1vYvf779gNzOC9ulaYOKfyUwBK3DKB3ZcjUt70aUlfx0rcPavLaFO6jQ5LFQTIV-G8wxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"plate\": \"LUIS-123\",\n    \"parkingSpaceId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/tickets/entry",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "tickets",
+            "entry"
+          ]
+        },
+        "description": "Registra el ingreso de un vehículo y ocupa el puesto seleccionado. Requiere token."
+      },
+      "response": []
+    },
+    {
+      "name": "4. Registrar Salida (Privado)",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJraWQiOiJqMldPV1dNeGpuZzFWRGtwcW5lOUJ1aWtyd2ZiSGptdVJaOUhyNVNlL2g4PSIsImFsZyI6IlJTMjU2In0.eyJzdWIiOiI1NDM4NTQzOC1kMDUxLTcwYjktOWRjNy01YWQ4ZWEyYmU3Y2YiLCJpc3MiOiJodHRwczovL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tL3VzLWVhc3QtMV95endOQUxJMkEiLCJ2ZXJzaW9uIjoyLCJjbGllbnRfaWQiOiIzZ3Yyb3FlNG5pa28zczQ3c3JuMWtpdHNrNiIsIm9yaWdpbl9qdGkiOiJkYmEyZDZmNS1mNTM0LTQyNWYtYTUyZC1mZjk2NDc0ZTEwNjMiLCJldmVudF9pZCI6IjJmNjgwNTBlLTU2ODItNGY1YS1iNWUxLTUwNzA0MGQ4ZmY4MyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoicGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNzgzMTg1NTk4LCJleHAiOjE3ODMxODkxOTgsImlhdCI6MTc4MzE4NTU5OCwianRpIjoiZWE4YzVjNmYtZWY5YS00ZjdjLWJmNGQtNzgxYjYyYTdlYTQxIiwidXNlcm5hbWUiOiI1NDM4NTQzOC1kMDUxLTcwYjktOWRjNy01YWQ4ZWEyYmU3Y2YifQ.uI3vsIy6-r-_aLKPUlx_pteJlqVwfRY7cRejbVsKY_I2PEOXp3dqIkB2mNJsIHToW00zO2MENmL0qic5FvGQgORwZtuwnR1wWXQECkXY7cLrUiag89D96QnMkuB-0cihXQx3BnOgBqq8G720vdG9jjw6KaS2fvIzkSWOAz6OCsmq5NbDceTFzqzA4ljT7585Zp01_wUxHi2mPhZq9cBWgFlPwEjcXKU1ebL-7zrkfcB0GfgzU3k-A65hb4M3ki1nZPYyJsVWmJV_7dfeO1vYvf779gNzOC9ulaYOKfyUwBK3DKB3ZcjUt70aUlfx0rcPavLaFO6jQ5LFQTIV-G8wxQ",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/tickets/1/exit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "tickets",
+            "1",
+            "exit"
+          ]
+        },
+        "description": "Registra la salida del vehículo liberando el puesto asignado. Modificar el ID en la URL de acuerdo al ticket. Requiere token."
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "access_token",
+      "value": "reemplaza-con-tu-token-jwt-aqui"
+    }
+  ]
+}
