@@ -1,0 +1,170 @@
+{
+	"info": {
+		"_postman_id": "7a9b0c7c-47a3-4952-b883-7c8a49c95b0c",
+		"name": "ae_puce_2026_1473_luis_salomon",
+		"description": "Colección de Postman para el Examen 2 de Estacionamiento de Luis Salomon basada en la planificación.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1. Obtener Token Cognito (Intercambio)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "authorization_code",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "3gv2oqe4niko3s47srn1kitsk6",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "14qdd388f1j6fge52el3l5r2ouvcg5sperlno3701t2jj1chgeiu",
+							"type": "text"
+						},
+						{
+							"key": "code",
+							"value": "<PEGA_TU_CODE_AQUI>",
+							"type": "text"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https://d84l1y8p4kdic.cloudfront.net",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://us-east-1yzwnali2a.auth.us-east-1.amazoncognito.com/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"us-east-1yzwnali2a",
+						"auth",
+						"us-east-1",
+						"amazoncognito",
+						"com"
+					],
+					"path": [
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "Intercambia el código temporal obtenido en la Hosted UI por los tokens JWT de Cognito."
+			},
+			"response": []
+		},
+		{
+			"name": "2. Listar Espacios Disponibles (Público)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/parking-spaces/available",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"parking-spaces",
+						"available"
+					]
+				},
+				"description": "Devuelve la cartelera de puestos de estacionamiento que están desocupados sin requerir token."
+			},
+			"response": []
+		},
+		{
+			"name": "3. Registrar Entrada (Privado)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"plate\": \"LUIS-123\",\n    \"parkingSpaceId\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/tickets/entry",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tickets",
+						"entry"
+					]
+				},
+				"description": "Registra el ingreso de un vehículo y ocupa el puesto seleccionado. Requiere token."
+			},
+			"response": []
+		},
+		{
+			"name": "4. Registrar Salida (Privado)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/tickets/1/exit",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"tickets",
+						"1",
+						"exit"
+					]
+				},
+				"description": "Registra la salida del vehículo liberando el puesto asignado. Modificar el ID en la URL de acuerdo al ticket. Requiere token."
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": "reemplaza-con-tu-token-jwt-aqui",
+			"type": "string"
+		}
+	]
+}
